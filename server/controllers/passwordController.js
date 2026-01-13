@@ -39,6 +39,14 @@ const forgotPassword = async (req, res) => {
     // For now, return the token (for testing/demo purposes)
     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
+    if (process.env.NODE_ENV === 'production') {
+      // In production we would email the link; do not expose token in response
+      return res.status(200).json({
+        success: true,
+        message: 'Password reset link sent'
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: 'Password reset token generated',
@@ -81,7 +89,7 @@ const resetPassword = async (req, res) => {
       .digest('hex');
 
     const user = await User.findOne({
-      resetPasswordToken: hashedToken,
+      resetPasswordToken,
       resetPasswordExpire: { $gt: Date.now() }
     });
 

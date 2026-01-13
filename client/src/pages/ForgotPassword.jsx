@@ -19,7 +19,10 @@ const ForgotPassword = () => {
     try {
       const response = await api.post('/auth/forgot-password', { email });
       setSuccess(response.data.message);
-      setResetToken(response.data.resetToken);
+      // Only surface reset token in non-production for testing
+      if (import.meta.env.MODE !== 'production') {
+        setResetToken(response.data.resetToken);
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send reset link');
     } finally {
@@ -46,7 +49,7 @@ const ForgotPassword = () => {
         {success && (
           <div className="bg-green-50 border-l-4 border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
             <p className="mb-2">{success}</p>
-            {resetToken && (
+            {resetToken && import.meta.env.MODE !== 'production' && (
               <div className="mt-4">
                 <p className="font-semibold mb-2">Reset Token (for testing):</p>
                 <code className="bg-gray-800 text-white p-2 rounded block break-all text-xs">
