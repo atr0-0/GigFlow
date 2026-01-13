@@ -125,7 +125,7 @@ const GigBids = () => {
               {bids.map((bid) => (
                 <div
                   key={bid._id}
-                  className={`bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-xl border-2 transition-all hover:shadow-2xl hover:-translate-y-1 ${
+                  className={`bg-white/90 backdrop-blur-sm rounded-3xl p-4 sm:p-6 shadow-xl border-2 transition-all hover:shadow-2xl hover:-translate-y-1 ${
                     bid.status === 'hired'
                       ? 'border-green-400 bg-green-50/50'
                       : bid.status === 'rejected'
@@ -133,15 +133,15 @@ const GigBids = () => {
                       : 'border-gray-200'
                   }`}
                 >
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-display font-bold text-2xl text-gray-800">{bid.freelancer?.name}</h3>
-                      <p className="text-sm text-gray-600 mt-1">{bid.freelancer?.email}</p>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-display font-bold text-xl sm:text-2xl text-gray-800 break-words">{bid.freelancer?.name}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-1 break-all">{bid.freelancer?.email}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-3xl font-bold text-green-600">${bid.price}</p>
+                    <div className="flex items-center justify-between sm:flex-col sm:items-end gap-2">
+                      <p className="text-2xl sm:text-3xl font-bold text-green-600 flex-shrink-0">${bid.price}</p>
                       <span
-                        className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold mt-2 shadow-sm ${
+                        className={`inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm whitespace-nowrap ${
                           bid.status === 'hired'
                             ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white'
                             : bid.status === 'rejected'
@@ -159,15 +159,15 @@ const GigBids = () => {
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-sm text-gray-600 mb-2 font-medium">Proposal Message</p>
-                    <p className="text-gray-700 whitespace-pre-wrap bg-pastel-lavender/30 p-4 rounded-xl leading-relaxed">{bid.message}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mb-2 font-medium">Proposal Message</p>
+                    <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap bg-pastel-lavender/30 p-3 sm:p-4 rounded-xl leading-relaxed break-words">{bid.message}</p>
                   </div>
 
                   {bid.status === 'pending' && gig?.status === 'open' && (
                     <button
                       onClick={() => handleHire(bid._id)}
                       disabled={isLoading}
-                      className="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all hover:shadow-xl hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                      className="w-full sm:w-auto bg-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-purple-700 transition-all hover:shadow-xl hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                       {isLoading ? 'Hiring...' : '🎉 Hire This Freelancer'}
                     </button>
