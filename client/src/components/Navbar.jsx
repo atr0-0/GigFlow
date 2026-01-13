@@ -26,7 +26,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-purple-600 focus:outline-none"
+            className="lg:hidden text-gray-700 hover:text-purple-600 focus:outline-none"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -38,15 +38,17 @@ const Navbar = () => {
           </button>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-3 text-sm md:text-base">
             {isAuthenticated ? (
               <>
                 <Link to="/gigs" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                   Browse Gigs
                 </Link>
+                <span className="text-gray-300">|</span>
                 <Link to="/my-gigs" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                   My Jobs
                 </Link>
+                <span className="text-gray-300">|</span>
                 <Link to="/my-bids" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">
                   My Bids
                 </Link>
@@ -87,7 +89,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200">
             {isAuthenticated ? (
               <div className="flex flex-col space-y-3">
                 <div className="flex items-center space-x-3 px-4 py-2">

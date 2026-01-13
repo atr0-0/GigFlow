@@ -61,12 +61,12 @@ const MyGigs = () => {
           <div className="space-y-6">
             {myGigs.map((gig) => (
               <div key={gig._id} className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                <div className="flex justify-between items-start">
+                <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
                       <h3 className="text-xl font-bold">{gig.title}</h3>
                       <span
-                        className={`px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm ${
+                        className={`px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${
                           gig.status === 'open'
                             ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white'
                             : 'bg-gradient-to-r from-blue-400 to-indigo-500 text-white'
@@ -75,9 +75,9 @@ const MyGigs = () => {
                         {gig.status === 'open' ? '🟢 Open' : '✅ Assigned'}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4">{gig.description}</p>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{gig.description}</p>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-4">
                       <span className="text-lg font-bold text-green-600">
                         Budget: ${gig.budget}
                       </span>
@@ -89,17 +89,17 @@ const MyGigs = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col sm:items-end gap-2 min-w-[150px]">
                     <Link
                       to={`/gig/${gig._id}/bids`}
-                      className="bg-purple-600 text-white px-6 py-2 rounded-xl hover:bg-purple-700 transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg hover:scale-105"
+                      className="bg-purple-600 text-white px-5 py-2 rounded-xl hover:bg-purple-700 transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg"
                     >
                       View Bids
                     </Link>
                     {gig.status === 'open' && (
                       <button
                         onClick={() => handleDelete(gig._id)}
-                        className="bg-red-500 text-white px-6 py-2 rounded-xl hover:bg-red-600 transition-all duration-300 font-semibold shadow-md hover:shadow-lg hover:scale-105"
+                        className="bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 transition-all duration-300 font-semibold shadow-md hover:shadow-lg"
                       >
                         🗑️ Delete
                       </button>
