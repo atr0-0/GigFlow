@@ -2,6 +2,10 @@
 
 A full-stack freelance marketplace application where clients can post jobs and freelancers can submit bids. Built with the MERN stack (MongoDB, Express, React, Node.js).
 
+**Live Demo**
+- Frontend (Vercel): https://usegigflow.vercel.app
+- Backend (Render): https://gigflow-05sd.onrender.com
+
 ## 🚀 Features
 
 ### Core Features
@@ -15,7 +19,6 @@ A full-stack freelance marketplace application where clients can post jobs and f
 ### Bonus Features (Implemented)
 - ✅ **Transactional Integrity**: MongoDB transactions prevent race conditions during hiring
 - ✅ **Real-time Notifications**: Socket.io integration for instant hiring notifications
-- ✅ **Professional UI**: Clean, responsive design with Tailwind CSS
 - ✅ **State Management**: Redux Toolkit for predictable state management
 
 ## 🛠️ Tech Stack
@@ -163,6 +166,11 @@ Socket.io implementation for instant notifications:
 - No page refresh required
 - Toast-style notifications with auto-dismiss
 
+### Password Reset Flow
+- Forgot password generates a reset token, stored hashed with a 10-minute expiry.
+- In production, the token is **not** exposed in the API or UI; only a success message is returned.
+- In non-production, the token is shown on-screen for testing convenience.
+
 ## 📱 User Flow
 
 1. **Registration/Login**: Users create an account or log in
@@ -214,17 +222,31 @@ Socket.io implementation for instant notifications:
 
 ### Backend (.env)
 ```
+# Local
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 NODE_ENV=development
 CLIENT_URL=http://localhost:5173
+
+# Production example
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+NODE_ENV=production
+CLIENT_URL=https://usegigflow.vercel.app
 ```
 
 ### Frontend (.env)
 ```
+# Local
 VITE_API_URL=http://localhost:5000/api
+
+# Production example (Vercel)
+VITE_API_URL=https://gigflow-05sd.onrender.com/api
 ```
+
+> Vercel SPA routing: `client/vercel.json` rewrites all paths to `index.html` so deep links (e.g., /gigs) work on refresh.
 
 ## 🤝 Contributing
 
